@@ -3,7 +3,7 @@ import Button from "./Button.jsx";
 
 export default function TaskForm() {
   return (
-    <div className="p-5 border-2 border-stone-500 rounded-md shadow-3xl bg-blue-400 w-1/5 text-center">
+    <div className="p-5 border-2 border-stone-500 rounded-md shadow-3xl bg-blue-400 w-full text-center">
       <h1 className="mb-3 text-2xl text-stone-50 font-bold text-center ">
         Enter your task!
       </h1>
