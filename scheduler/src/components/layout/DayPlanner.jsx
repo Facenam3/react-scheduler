@@ -21,10 +21,10 @@ export default function DayPlanner() {
   const days = [today, tomorrow];
   return (
     <div className="p-3">
-      <h2 className="text-xl font-semibold text-gray-700 text-center">
+      <h2 className="text-3xl font-extrabold text-purple-700 text-center mb-3">
         Your Scheduler
       </h2>
-      <div className="p-3 max-w-1/5 mx-auto">
+      <div className="p-3 max-w-2/4 mx-auto">
         <div className="flex gap-4 mb-6 justify-center items-center">
           {days.map((day) => (
             <div
@@ -50,8 +50,9 @@ export default function DayPlanner() {
           ))}
         </div>
 
-        <div className="p-3">
+        <div className="p-3 flex gap-3">
           <Scheduler title={`Tasks for ${formatDate(selectedDate)}`} />
+          <Scheduler done title={`Done for ${formatDate(selectedDate)}`} />
         </div>
       </div>
     </div>
