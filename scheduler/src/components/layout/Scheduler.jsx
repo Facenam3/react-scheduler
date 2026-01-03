@@ -1,22 +1,38 @@
 import Card from "../UI/Card.jsx";
 import SectionTitle from "../UI/SectionTitle.jsx";
 
-export default function Scheduler({ title, done }) {
-  let scheduler = (
-    <div className="w-full">
-      <SectionTitle title={title} />
-      <Card />
-    </div>
-  );
-
-  if (done) {
-    return (scheduler = (
+export default function Scheduler({ title, done, toDoTasks, doneTasks }) {
+  if (!done) {
+    return (
       <div className="w-full">
-        <SectionTitle title={title} done />
-        <Card />
+        <SectionTitle title={title} />
+        {toDoTasks.map((task) => (
+          <Card
+            key={task.id}
+            id={task.id}
+            title={task.title}
+            time={task.time}
+            date={task.date}
+            description={task.description}
+          />
+        ))}
       </div>
-    ));
+    );
   }
 
-  return scheduler;
+  return (
+    <div className="w-full">
+      <SectionTitle title={title} done />
+      {doneTasks.map((task) => (
+        <Card
+          key={task.id}
+          id={task.id}
+          title={task.title}
+          time={task.time}
+          date={task.date}
+          description={task.description}
+        />
+      ))}
+    </div>
+  );
 }

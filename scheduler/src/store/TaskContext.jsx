@@ -44,6 +44,8 @@ function taskReducer(state, action) {
       (task) => task.id === action.id
     );
 
+    if (existingTaskItemIndex === -1) return state;
+
     const updatedTask = {
       ...state.tasks[existingTaskItemIndex],
       ...action.task,
@@ -87,8 +89,8 @@ export function TaskContextProvider({ children }) {
     dispatchTaskAction({ type: "REMOVE_TASK", id });
   }
 
-  function updateTask(id) {
-    dispatchTaskAction({ type: "UPDATE_TASK" }, id);
+  function updateTask(id, task) {
+    dispatchTaskAction({ type: "UPDATE_TASK", id: id, task });
   }
 
   const taskContext = {

@@ -3,6 +3,8 @@ import DayPlanner from "./components/layout/DayPlanner.jsx";
 import { TaskContextProvider } from "./store/TaskContext.jsx";
 import { ModalContextProvider } from "./store/ModalContext.jsx";
 import AddTaskForm from "./components/layout/AddTaskForm.jsx";
+import ViewTask from "./components/layout/ViewTask.jsx";
+import EditTask from "./components/layout/EditTask.jsx";
 
 function App() {
   return (
@@ -12,6 +14,8 @@ function App() {
         <main className="w-screen">
           <AddTaskForm />
           <DayPlanner />
+          <ViewTask />
+          <EditTask />
         </main>
       </ModalContextProvider>
     </TaskContextProvider>
