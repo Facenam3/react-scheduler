@@ -1,7 +1,16 @@
+import { useContext } from "react";
+
 import Input from "./Input.jsx";
 import Button from "./Button.jsx";
+import ModalContext from "../../store/ModalContext.jsx";
 
 export default function TaskForm() {
+  const modalCtx = useContext(ModalContext);
+
+  function handleClose() {
+    modalCtx.closeModal();
+  }
+
   return (
     <div className="p-5 border-2 border-stone-500 rounded-md shadow-3xl bg-blue-400 w-full text-center">
       <h1 className="mb-3 text-2xl text-stone-50 font-bold text-center ">
@@ -37,9 +46,14 @@ export default function TaskForm() {
           description
           required
         />
-        <Button color type="submit">
-          Submit
-        </Button>
+        <div className="flex justify-center gap-3">
+          <Button color type="submit">
+            Submit
+          </Button>
+          <Button color type="submit" onClick={handleClose}>
+            Close
+          </Button>
+        </div>
       </form>
     </div>
   );
