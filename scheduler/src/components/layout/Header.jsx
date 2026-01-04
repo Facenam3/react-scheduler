@@ -13,7 +13,7 @@ export default function Header() {
   }
 
   return (
-    <header className="bg-blue-400 text-gray-100 p-3 mb-10 shadow-amber-200 shadow-xl">
+    <header className="bg-purple-400 text-gray-100 p-3 mb-10 shadow-amber-200 shadow-xl">
       <div className="flex justify-between items-center container mx-auto">
         <a href="/">
           <i className="fa-regular fa-note-sticky mr-3"></i>

@@ -12,7 +12,7 @@ export default function Button({ children, color, ...props }) {
 
   return (
     <button
-      className="bg-purple-500 text-gray-200 hover:bg-purple-700 hover:text-gray-50 rounded-md px-3 py-2 border-2 border-amber-50"
+      className="bg-blue-500 text-gray-200 hover:bg-purple-700 hover:text-gray-50 rounded-md px-3 py-2 border-2 border-amber-50"
       {...props}
     >
       {children}

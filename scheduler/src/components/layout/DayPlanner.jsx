@@ -38,6 +38,9 @@ export default function DayPlanner() {
   const toDoTasks = taskForSelectedDay.filter((task) => !task.isComplete);
   const doneTasks = taskForSelectedDay.filter((task) => task.isComplete);
 
+  console.log(taskForSelectedDay);
+  console.log(toDoTasks);
+
   return (
     <div className="p-3">
       <h2 className="text-3xl font-extrabold text-purple-700 text-center mb-3">
