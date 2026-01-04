@@ -15,6 +15,8 @@ export default function AddTaskForm() {
 
   function handleAddTask(data) {
     taskCtx.addTask(data);
+    taskCtx.setSelectedDate(data.date);
+    taskCtx.setCalendarDate("");
 
     modalCtx.closeModal();
   }

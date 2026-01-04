@@ -5,6 +5,7 @@ import { ModalContextProvider } from "./store/ModalContext.jsx";
 import AddTaskForm from "./components/layout/AddTaskForm.jsx";
 import ViewTask from "./components/layout/ViewTask.jsx";
 import EditTask from "./components/layout/EditTask.jsx";
+import Calendar from "./components/layout/Calendar.jsx";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <DayPlanner />
           <ViewTask />
           <EditTask />
+          <Calendar />
         </main>
       </ModalContextProvider>
     </TaskContextProvider>

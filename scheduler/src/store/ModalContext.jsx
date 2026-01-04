@@ -7,6 +7,7 @@ const ModalContext = createContext({
   viewTask: (id) => {},
   editTask: (id) => {},
   closeModal: () => {},
+  openCalendar: () => {},
 });
 
 function modalReducer(state, action) {
@@ -24,6 +25,10 @@ function modalReducer(state, action) {
 
   if (action.type === "CLOSE_MODAL") {
     return { type: null, taskId: null };
+  }
+
+  if (action.type === "OPEN_CALENDAR") {
+    return { type: "calendar", taskId: null };
   }
 
   return state;
@@ -51,6 +56,10 @@ export function ModalContextProvider({ children }) {
     dispatchModalAction({ type: "CLOSE_MODAL" });
   }
 
+  function openCalendar() {
+    dispatchModalAction({ type: "OPEN_CALENDAR" });
+  }
+
   const modalContext = {
     type: modalState.type,
     taskId: modalState.taskId,
@@ -58,6 +67,7 @@ export function ModalContextProvider({ children }) {
     viewTask,
     editTask,
     closeModal,
+    openCalendar,
   };
 
   return (

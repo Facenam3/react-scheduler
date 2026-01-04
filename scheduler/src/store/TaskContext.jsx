@@ -2,6 +2,10 @@ import { createContext, useReducer } from "react";
 
 const TaskContext = createContext({
   tasks: [],
+  selectedDate: null,
+  calendarDate: null,
+  setSelectedDate: (date) => {},
+  setCalendarDate: (date) => {},
   addTask: (task) => {},
   completedTask: (id) => {},
   updateTask: (id) => {},
@@ -21,20 +25,9 @@ function taskReducer(state, action) {
   }
 
   if (action.type === "COMPLETED_TASK") {
-    const existingTaskItemIndex = state.tasks.findIndex(
-      (task) => task.id === action.id
+    const updatedTasks = state.tasks.map((task) =>
+      task.id === action.id ? { ...task, isComplete: !task.isComplete } : task
     );
-    const updatedTasks = [...state.tasks];
-    const existingTaskItem = updatedTasks[existingTaskItemIndex];
-
-    if (existingTaskItem) {
-      const updatedTask = {
-        ...existingTaskItem,
-        isComplete: true,
-      };
-
-      updatedTasks[existingTaskItemIndex] = updatedTask;
-    }
 
     return { ...state, tasks: updatedTasks };
   }
@@ -71,11 +64,23 @@ function taskReducer(state, action) {
     return { ...state, tasks: updatedTasks };
   }
 
+  if (action.type === "SET_SELECTED_DATE") {
+    return { ...state, selectedDate: action.date };
+  }
+
+  if (action.type === "SET_CALENDAR_DATE") {
+    return { ...state, calendarDate: action.date };
+  }
+
   return state;
 }
 
 export function TaskContextProvider({ children }) {
-  const [task, dispatchTaskAction] = useReducer(taskReducer, { tasks: [] });
+  const [task, dispatchTaskAction] = useReducer(taskReducer, {
+    tasks: [],
+    selectedDate: "",
+    calendarDate: "",
+  });
 
   function addTask(task) {
     dispatchTaskAction({ type: "ADD_TASK", task });
@@ -93,12 +98,24 @@ export function TaskContextProvider({ children }) {
     dispatchTaskAction({ type: "UPDATE_TASK", id: id, task });
   }
 
+  function setSelectedDate(date) {
+    dispatchTaskAction({ type: "SET_SELECTED_DATE", date });
+  }
+
+  function setCalendarDate(date) {
+    dispatchTaskAction({ type: "SET_CALENDAR_DATE", date });
+  }
+
   const taskContext = {
     tasks: task.tasks,
+    selectedDate: task.selectedDate,
+    calendarDate: task.calendarDate,
     addTask,
     completedTask,
     removeTask,
     updateTask,
+    setSelectedDate,
+    setCalendarDate,
   };
 
   console.log(taskContext);
