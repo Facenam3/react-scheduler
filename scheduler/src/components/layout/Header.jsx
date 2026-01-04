@@ -6,8 +6,6 @@ import ModalContext from "../../store/ModalContext.jsx";
 export default function Header() {
   const modalCtx = useContext(ModalContext);
 
-  console.log(modalCtx);
-
   function handleAddTask() {
     modalCtx.openForm();
   }
