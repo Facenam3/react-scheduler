@@ -10,6 +10,7 @@ import {
   validateTime,
   validateDate,
 } from "../../utils/validation.js";
+import { formatToYYYYMMDD } from "../../utils/date.js";
 
 export default function TaskForm({ onSubmit, editTask }) {
   const [errors, setErrors] = useState({});
@@ -29,14 +30,14 @@ export default function TaskForm({ onSubmit, editTask }) {
       setFormValues({
         title: "",
         time: "",
-        date: "",
+        date: taskCtx.calendarDate || taskCtx.selectedDate || "",
         description: "",
         id: null,
       });
       setErrors({});
       return;
     }
-  }, [modalCtx.type, modalCtx.taskId, taskCtx.tasks]);
+  }, [modalCtx.type, modalCtx.taskId, taskCtx.tasks, taskCtx.calendarDate]);
 
   useEffect(() => {
     if (modalCtx.type === "edit" && modalCtx.taskId != null) {
@@ -138,7 +139,8 @@ export default function TaskForm({ onSubmit, editTask }) {
           type="date"
           name="date"
           label="Date"
-          value={formValues.date}
+          min={new Date().toISOString().split("T")[0]}
+          value={formatToYYYYMMDD(formValues.date)}
           onChange={handleChange}
         />
         {errors.date && (

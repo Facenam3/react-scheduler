@@ -12,6 +12,10 @@ export default function Header() {
     modalCtx.openForm();
   }
 
+  function handleOpenCalendar() {
+    modalCtx.openCalendar();
+  }
+
   return (
     <header className="bg-purple-400 text-gray-100 p-3 mb-10 shadow-amber-200 shadow-xl">
       <div className="flex justify-between items-center container mx-auto">
@@ -25,9 +29,7 @@ export default function Header() {
           </li>
 
           <li>
-            <a href="#" className="text-xl">
-              Calendar
-            </a>
+            <Button onClick={handleOpenCalendar}>Calendar</Button>
           </li>
         </ul>
       </div>
