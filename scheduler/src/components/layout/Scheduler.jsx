@@ -14,6 +14,7 @@ export default function Scheduler({ title, done, toDoTasks, doneTasks }) {
             time={task.time}
             date={task.date}
             description={task.description}
+            isComplete={task.isComplete}
           />
         ))}
       </div>
@@ -31,6 +32,7 @@ export default function Scheduler({ title, done, toDoTasks, doneTasks }) {
           time={task.time}
           date={task.date}
           description={task.description}
+          isComplete={task.isComplete}
         />
       ))}
     </div>
