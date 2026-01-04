@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useEffect, useReducer } from "react";
 
 const TaskContext = createContext({
   tasks: [],
@@ -13,11 +13,17 @@ const TaskContext = createContext({
 });
 
 function taskReducer(state, action) {
+  if (action.type === "LOAD_TASKS") {
+    return { ...state, tasks: action.tasks };
+  }
+
   if (action.type === "ADD_TASK") {
     const updatedTasks = [...state.tasks];
 
     const id =
-      state.tasks.length > 0 ? state.tasks[state.tasks.length - 1].id + 1 : 1;
+      state.tasks.length > 0
+        ? Math.max(...state.tasks.map((t) => t.id)) + 1
+        : 1;
 
     updatedTasks.push({ ...action.task, id, isComplete: false });
 
@@ -76,11 +82,16 @@ function taskReducer(state, action) {
 }
 
 export function TaskContextProvider({ children }) {
+  const storedTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
   const [task, dispatchTaskAction] = useReducer(taskReducer, {
-    tasks: [],
+    tasks: storedTasks,
     selectedDate: "",
     calendarDate: "",
   });
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(task.tasks));
+  }, [task.tasks]);
 
   function addTask(task) {
     dispatchTaskAction({ type: "ADD_TASK", task });
@@ -117,8 +128,6 @@ export function TaskContextProvider({ children }) {
     setSelectedDate,
     setCalendarDate,
   };
-
-  console.log(taskContext);
 
   return (
     <TaskContext.Provider value={taskContext}>{children}</TaskContext.Provider>

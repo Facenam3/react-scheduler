@@ -5,8 +5,6 @@ import TaskContext from "../../store/TaskContext";
 export default function Checkbox({ id, isComplete }) {
   const taskCtx = useContext(TaskContext);
 
-  console.log(id);
-
   function handleCompleteTask() {
     taskCtx.completedTask(id);
   }
